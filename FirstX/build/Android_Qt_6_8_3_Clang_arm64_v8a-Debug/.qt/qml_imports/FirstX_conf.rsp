@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/shinobu/src/XR/XR_first/FirstX
+-cmake-output
+-output-file
+C:/Users/shinobu/src/XR/XR_first/FirstX/build/Android_Qt_6_8_3_Clang_arm64_v8a-Debug/.qt/qml_imports/FirstX_conf.cmake
+-importPath
+C:/Users/shinobu/src/XR/XR_first/FirstX/build/Android_Qt_6_8_3_Clang_arm64_v8a-Debug/FirstX
+-importPath
+C:/Users/shinobu/src/XR/XR_first/FirstX/build/Android_Qt_6_8_3_Clang_arm64_v8a-Debug
+-importPath
+C:/Qt/6.8.3/android_arm64_v8a/qml
+-qrcFiles
+C:/Users/shinobu/src/XR/XR_first/FirstX/build/Android_Qt_6_8_3_Clang_arm64_v8a-Debug/.qt/rcc/qmake_FirstX.qrc
+C:/Users/shinobu/src/XR/XR_first/FirstX/build/Android_Qt_6_8_3_Clang_arm64_v8a-Debug/.qt/rcc/FirstX_raw_qml_0.qrc

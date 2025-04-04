@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/FirstX">C:/Users/shinobu/src/XR/XR_first/FirstX/build/Android_Qt_6_8_3_Clang_arm64_v8a-Debug/FirstX</file>
+
+  </qresource>
+</RCC>
