@@ -4,7 +4,7 @@ project(FirstX VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 COMPONENTS Core Gui Quick Quick3D Quick3DXr)
+find_package(Qt6 COMPONENTS Core Gui Quick Quick3D Quick3DXr Charts)
 
 qt_standard_project_setup(REQUIRES 6.8)
 qt6_policy(SET QTP0002 NEW)
@@ -36,6 +36,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
         Qt::Quick3D
         Qt::Quick3DXr
 )
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Charts)
 
 if(ANDROID)
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
