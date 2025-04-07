@@ -91,16 +91,32 @@ XrView {
         }
     }
 
+    Timer {
+        id: valueChangeTimer
+        property real a:0
+        property real b:0
+        interval: 2000
+        running: true
+        repeat: true
+        onTriggered: {
+            valueChangeTimer.a = Math.random() * 10;
+            valueChangeTimer.b = Math.random() * 10;
+            console.log("a: ",valueChangeTimer.a, ", b: ", valueChangeTimer.b);
+            graf;
+        }
+    }
+
     XrItem {
+        id: graf
         x: 0
         y: 100
-        z: -50
-        width: 100
-        height: 100
+        z: -200
+        width: 200
+        height: 200
 
         Rectangle {
-            width: 100
-            height: 100
+            width: 200
+            height: 200
             color: "red"
 
             ChartView {
@@ -109,12 +125,13 @@ XrView {
                 antialiasing: true
 
                 LineSeries {
+                    id: lineSeries
                     name: "Line"
                     XYPoint { x: 0; y: 0 }
                     XYPoint { x: 1.1; y: 2.1 }
                     XYPoint { x: 1.9; y: 3.3 }
                     XYPoint { x: 2.1; y: 2.1 }
-                    XYPoint { x: 2.9; y: 4.9 }
+                    XYPoint { x: valueChangeTimer.a; y: valueChangeTimer.b }
                     XYPoint { x: 3.4; y: 3.0 }
                     XYPoint { x: 4.1; y: 3.3 }
                 }
