@@ -24,9 +24,19 @@ XrView {
 
         XrController{
             id: righthand
-            controller: XrController.ControllerRight
+            controller: handright.hand
             poseSpace: XrController.AimPose
         }
+
+        XrHandModel{
+            id: handright
+            hand: XrHandModel.RightHand
+            materials: PrincipledMaterial{
+                baseColor: "red"
+        }
+
+    }
+
 
     }
 
