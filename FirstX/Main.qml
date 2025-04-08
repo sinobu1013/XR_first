@@ -3,6 +3,9 @@ import QtQuick3D.Helpers
 import QtQuick3D
 import QtQuick3D.Xr
 
+import QtQuick.Layouts
+import QtQuick.Controls
+
 XrView {
     id: xrView
 
@@ -18,6 +21,13 @@ XrView {
     XrOrigin {
         id: theOrigin
         z: 100
+
+        XrController{
+            id: righthand
+            controller: XrController.ControllerRight
+            poseSpace: XrController.AimPose
+        }
+
     }
 
     DirectionalLight {
@@ -52,6 +62,28 @@ XrView {
                 metalness: metalnessCheckBox.checked ? 1.0 : 0.0
             }
         ]
+    }
+
+    XrItem {
+        id: try_button
+        z: 50
+        width: 100
+        height: 100
+
+        Rectangle {
+            width: 100
+            height: 100
+            color: "red"
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 10
+                Button {
+                    text: "OK!"
+                    Layout.alignment: Qt.AlignHCenter
+                }
+            }
+        }
     }
 
 
