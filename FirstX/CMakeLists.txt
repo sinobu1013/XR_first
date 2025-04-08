@@ -20,6 +20,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     VERSION 1.0
     QML_FILES
         Main.qml
+    RESOURCES
+        meshes/teapot.mesh
 )
 
 if (APPLE AND CMAKE_SYSTEM_NAME STREQUAL "visionOS")

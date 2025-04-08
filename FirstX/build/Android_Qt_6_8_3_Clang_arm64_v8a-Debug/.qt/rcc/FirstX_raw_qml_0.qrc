@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="/qt/qml/FirstX/">
     <file alias="Main.qml">C:/Users/shinobu/src/XR/XR_first/FirstX/Main.qml</file>
+    <file alias="meshes/teapot.mesh">C:/Users/shinobu/src/XR/XR_first/FirstX/meshes/teapot.mesh</file>
   </qresource>
 </RCC>
 

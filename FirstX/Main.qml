@@ -17,32 +17,7 @@ XrView {
     xrOrigin: theOrigin
     XrOrigin {
         id: theOrigin
-
-        XrController {
-            controller: XrController.ControllerLeft
-            poseSpace: XrController.AimPose
-            Model {
-                source: "#Cube"
-                scale: Qt.vector3d(0.1, 0.1, 0.1)
-                materials: PrincipledMaterial {
-                    lighting: DefaultMaterial.NoLighting
-                    baseColor: "red"
-                }
-            }
-        }
-
-        XrController {
-            controller: XrController.ControllerRight
-            poseSpace: XrController.AimPose
-            Model {
-                source: "#Cube"
-                scale: Qt.vector3d(0.1, 0.1, 0.1)
-                materials: PrincipledMaterial {
-                    lighting: DefaultMaterial.NoLighting
-                    baseColor: "green"
-                }
-            }
-        }
+        z: 100
     }
 
     DirectionalLight {
@@ -50,58 +25,37 @@ XrView {
         eulerRotation.y: -70
     }
 
-    // The scene:
-    Model {
-        y: 100
-        z: -50
+    Model{
+        id: table
+        property real height: 70
+        position: Qt.vector3d(0, height / 2, 0)
         source: "#Cube"
-        scale: Qt.vector3d(0.2, 0.2, 0.2)
+        scale: Qt.vector3d(0.4, height / 100, 0.4)
         materials: PrincipledMaterial {
-            baseColor: "green"
-        }
-        eulerRotation.x: 30
-        PropertyAnimation on eulerRotation {
-            from: "30, 0, 0"
-            to: "30, 360, 0"
-            loops: -1
-            duration: 20000
+            baseColor: "red"
+            roughness: 0.7
         }
     }
-    // Anchors:
-    Repeater3D {
-        id: spatialAnchors
-        model: XrSpatialAnchorListModel {
-        }
-        delegate: Node {
-            id: anchorNode
-            required property XrSpatialAnchor anchor
-            required property int index
-            position: anchor.position
-            rotation: anchor.rotation
 
-            Model {
-                // Visualize anchor orientation
-                materials: PrincipledMaterial { baseColor: "white" }
-                source: "#Cone"
-                scale: Qt.vector3d(0.2, 0.2, 0.2)
-                eulerRotation.x: 90
+    Model{
+        id: teapot
+        y: table.height + 5
+        source: "meshes/teapot.mesh"
+        scale: Qt.vector3d(10, 10, 10)
+        property color color: "#cdad52"
+        materials: [
+            PrincipledMaterial {
+                baseColor: teapot.color
+                roughness: 0.1
+                clearcoatAmount: clearcoatSlider.value
+                clearcoatRoughnessAmount: 0.1
+                metalness: metalnessCheckBox.checked ? 1.0 : 0.0
             }
-            visible: anchor.has2DBounds || anchor.has3DBounds
-        }
+        ]
     }
 
-    XrItem {
-        x: 0
-        y: 100
-        z: -50
-        width: 100
-        height: 100
 
-        Rectangle {
-            width: 100
-            height: 100
-            color: "red"
-        }
-    }
+
+
 
 }
