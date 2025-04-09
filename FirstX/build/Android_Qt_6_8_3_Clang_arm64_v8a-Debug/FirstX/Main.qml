@@ -21,30 +21,44 @@ XrView {
     XrOrigin {
         id: theOrigin
 
-        Node {
-            id: pickRay
-            property real length: 50
-            property bool hit: false
+        XrController {
+            id: rightController
+            controller: XrController.ControllerRight
+            poseSpace: XrController.AimPose
 
-            z: -length/2
-            Model {
-                eulerRotation.x: 90
-                scale: Qt.vector3d(0.02, pickRay.length/100, 0.02)
-                source: "#Cylinder"
-                materials: PrincipledMaterial { baseColor: pickRay.hit ? "green" : "gray" }
-                opacity: 0.5
+            onRotationChanged: {
+                pickRay.length = 50
+                const pickResult = xrView.rayPick(scenePosition, forward);
+                if (pickResult.hitType !== PickResult.Null) {
+                    pickRay.length = pickResult.distance;
+                }
             }
-        }
 
-        Node {
-            z: 5
-            Model {
-                eulerRotation.x: 90
-                scale: Qt.vector3d(0.05, 0.10, 0.05)
-                source: "#Cylinder"
-                materials: PrincipledMaterial {
-                    baseColor: "black"
-                    roughness: 0.2
+            Node {
+                id: pickRay
+                property real length: 50
+                property bool hit: false
+
+                z: -length/2
+                Model {
+                    eulerRotation.x: 90
+                    scale: Qt.vector3d(0.02, pickRay.length/100, 0.02)
+                    source: "#Cylinder"
+                    materials: PrincipledMaterial { baseColor: pickRay.hit ? "green" : "gray" }
+                    opacity: 0.5
+                }
+            }
+
+            Node {
+                z: 5
+                Model {
+                    eulerRotation.x: 90
+                    scale: Qt.vector3d(0.05, 0.10, 0.05)
+                    source: "#Cylinder"
+                    materials: PrincipledMaterial {
+                        baseColor: "black"
+                        roughness: 0.2
+                    }
                 }
             }
         }
