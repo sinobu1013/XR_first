@@ -1,4 +1,7 @@
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+
 import QtQuick3D.Helpers
 import QtQuick3D
 import QtQuick3D.Xr
@@ -18,28 +21,30 @@ XrView {
     XrOrigin {
         id: theOrigin
 
-        XrController {
-            controller: XrController.ControllerLeft
-            poseSpace: XrController.AimPose
+        Node {
+            id: pickRay
+            property real length: 50
+            property bool hit: false
+
+            z: -length/2
             Model {
-                source: "#Cube"
-                scale: Qt.vector3d(0.1, 0.1, 0.1)
-                materials: PrincipledMaterial {
-                    lighting: DefaultMaterial.NoLighting
-                    baseColor: "red"
-                }
+                eulerRotation.x: 90
+                scale: Qt.vector3d(0.02, pickRay.length/100, 0.02)
+                source: "#Cylinder"
+                materials: PrincipledMaterial { baseColor: pickRay.hit ? "green" : "gray" }
+                opacity: 0.5
             }
         }
 
-        XrController {
-            controller: XrController.ControllerRight
-            poseSpace: XrController.AimPose
+        Node {
+            z: 5
             Model {
-                source: "#Cube"
-                scale: Qt.vector3d(0.1, 0.1, 0.1)
+                eulerRotation.x: 90
+                scale: Qt.vector3d(0.05, 0.10, 0.05)
+                source: "#Cylinder"
                 materials: PrincipledMaterial {
-                    lighting: DefaultMaterial.NoLighting
-                    baseColor: "green"
+                    baseColor: "black"
+                    roughness: 0.2
                 }
             }
         }
@@ -92,15 +97,45 @@ XrView {
 
     XrItem {
         x: 0
-        y: 100
-        z: -50
+        y: 150
+        z: -100
         width: 100
         height: 100
 
-        Rectangle {
-            width: 100
-            height: 100
-            color: "red"
+        contentItem: Rectangle {
+            width: 300
+            height: 400
+            color: Qt.rgba(1, 1, 1, 0.5)
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 10
+
+                Button {
+                    text: "Tokyo"
+                    onClicked: {
+                        console.log("Tokyo");
+                    }
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: parent.width * 2 / 3
+                }
+                Button {
+                    text: "Kyoto"
+                    onClicked: {
+                        console.log("Kyoto");
+                    }
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: parent.width * 2 / 3
+                }
+                Button {
+                    text: "Yamaguti"
+                    onClicked: {
+                        console.log("Yamaguti");
+                    }
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: parent.width * 2 / 3
+                }
+            }
         }
     }
 
