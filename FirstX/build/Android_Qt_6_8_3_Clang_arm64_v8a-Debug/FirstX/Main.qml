@@ -20,6 +20,7 @@ XrView {
     xrOrigin: theOrigin
     XrOrigin {
         id: theOrigin
+        z: 100
 
         XrController {
             id: rightController
@@ -62,6 +63,21 @@ XrView {
                 }
             }
         }
+    }
+
+    XrInputAction {
+        id: rightTrigger
+        hand: XrInputAction.RightHand
+        actionId: [XrInputAction.TriggerPressed, XrInputAction.TriggerValue, XrInputAction.IndexFingerPinch]
+        onTriggered: {
+            console.log("Button ON !!!!!!");
+        }
+    }
+
+    XrVirtualMouse {
+        view: xrView
+        source: rightController
+        rightMouseButton: rightTrigger.pressed
     }
 
     DirectionalLight {
